@@ -18,3 +18,9 @@ DB_PASSWORD=
 
 php artisan migrate
 php artisan serv
+
+php artisan make:model Post -m
+
+php artisan migrate
+php artisan migrate:refresh - перезоздает все предварительно все затерев
+
