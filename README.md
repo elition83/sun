@@ -24,3 +24,4 @@ php artisan make:model Post -m
 php artisan migrate
 php artisan migrate:refresh - перезоздает все предварительно все затерев
 
+php artisan make:command CreatePost
