@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
             $table->unsignedInteger('views')->default(0);
             $table->unsignedInteger('likes')->default(0);
-            $table->string('image_path');
+            $table->string('image_path')->default('');
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });

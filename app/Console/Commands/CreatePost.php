@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\Post;    
+use App\Models\Post;
 
 class CreatePost extends Command
 {
@@ -30,8 +30,8 @@ class CreatePost extends Command
         $content = $this->ask('Введите содержание поста');
 
         $post = Post::create([
-            'title' => 'Пример зпголовка',
-            'content' => 'Пример такста длывоа пдлывао длроывадлорылдаворлдвыаодлордлыодл поывдла',
+            'title' => $title,
+            'content' => $content,
             'author' => 'test',
             'image_path' => 'null'
         ]);
