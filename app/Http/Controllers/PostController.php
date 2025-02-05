@@ -7,16 +7,17 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-	public function index(){
+	public function index() {
 		//dd ('Hello POst');
 		return Post::all();
 	}
 
 	public function store() {
 		$data = [
-			'title' => 'title',
-			'content' => 'content',
-			'author'=>'author'
+			'title' => fake()->sentence(),
+			'content' => fake()->text(),
+			'author' => fake()->name(),
+			'image_path' => 'null'
 		];
 		return Post::create($data);
 	}  
