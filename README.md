@@ -19,6 +19,19 @@ DB_PASSWORD=
 php artisan migrate
 php artisan serv
 
+
+#Первые настройки Laravel
+Отглючаем глобально защиту массового заполнения
+/app/Providers/AppServiceProvider.php
+```php
+    use Illuminate\Database\Eloquent\Model; 
+    public function boot(): void
+    {
+        Model::unguard();  //Отключаем защиту filable глобально
+    }
+echo "Hello, world!";
+```
+
 php artisan make:model Post -m
 
 php artisan migrate
