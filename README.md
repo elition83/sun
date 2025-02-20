@@ -20,8 +20,10 @@ DB_PORT=3306
 DB_DATABASE=sun
 DB_USERNAME=sun
 DB_PASSWORD=
-
+```
+```bash
 php artisan migrate
+php artisan migrate:refresh - перезоздает все предварительно все затерев
 php artisan serv
 ```
 
@@ -36,9 +38,13 @@ php artisan serv
     }
 ```
 
-php artisan make:model Post -m
+```bash
+php artisan make:model Group -m
 
 php artisan migrate
-php artisan migrate:refresh - перезоздает все предварительно все затерев
 
-php artisan make:command CreatePost
+
+# Создание глобальной группы
+php artisan tinker --execute="\App\Models\Group::firstOrCreate(['id' => 1], ['title' => 'Global Group', 'description' => 'Глобальная группа'])"
+
+```
