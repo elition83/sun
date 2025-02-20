@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        // Таблица групп
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->uniqid();
+            $table->string('title', 32)->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('groups');
     }
 };
