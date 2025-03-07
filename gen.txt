@@ -1,0 +1,33 @@
+category
+	title=string(32)|unique|index
+	
+profile
+	name = string(32) | unique()
+	user_id = FK(users, id) | onDelete('cascade')
+	phone = string(32) | default('')
+	address=string(255)|default('')
+	gender=unsignedtinyInteger|default(0)
+
+post
+	title=string(32) | unique
+	content=text
+	profile_id=FK() | onDelete('cascade')
+	category_id=FK() | onDelete('cascade')
+	image_path=string(1024) | default('')
+	views=unsignedInteger | default(0)
+	likes=unsignedInteger | default(0)
+	is_published=boolean | default(false)
+	published_at=dateTime() | nullable()
+
+comment
+	content=text
+	post_id=FK | onDelete('cascade')
+	profile_id=FK | onDelete('cascade')
+	comment_id=FK | onDelete('cascade') | nullable()
+
+role
+	title=string(32) | unique()
+
+post_tag
+	post_id=FK() | onDelete('cascade')
+	tag_id=FK() | onDelete('cascade')

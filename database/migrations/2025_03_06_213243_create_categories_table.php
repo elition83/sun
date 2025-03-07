@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Таблица групп
-        Schema::create('groups', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 32)->unique();
-            $table->text('description')->nullable();
+        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table)                 $table->id();
+            $table->string('title', 32)$table->unique('title', )$table->index('title', );
             $table->timestamps();
-        });
+
+});
     }
 
     /**
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('categories');
     }
 };

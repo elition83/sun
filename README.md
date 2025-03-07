@@ -11,15 +11,15 @@ sudo systemctl restart mysql
 mysql
 ```
 ```bash
-nano env -> 
+nano .env  
 ```
 ```php
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=sun
-DB_USERNAME=sun
-DB_PASSWORD=
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=sun
+    DB_USERNAME=sun
+    DB_PASSWORD=
 ```
 ```bash
 php artisan migrate
@@ -28,7 +28,7 @@ php artisan serv
 ```
 
 #Первые настройки Laravel
-Отглючаем глобально защиту массового заполнения
+Отглючаем глобально защиту массового заполнения правим
 /app/Providers/AppServiceProvider.php
 ```php
     use Illuminate\Database\Eloquent\Model; 
