@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class ProfileService
+class CategoryService
 {
     /**
      * Create a new class instance.
@@ -12,12 +12,12 @@ class ProfileService
         //
     }
 
-    public static function store(array $data): Profile
+    public static function store(array $data): Category
     {
-        return Profile::create($data);
+        return Category::create($data);
     }
 
-    public static function update(Profile $entity, array $data): Profile
+    public static function update(Category $entity, array $data): Category
     {
         $entity->update($data);
         return $entity;

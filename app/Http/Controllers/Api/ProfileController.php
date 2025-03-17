@@ -12,49 +12,39 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    
-
-    
-
-    
-
-    
-
-    
-
     public function index()
     {
         return ProfileResource::collection(Profile::all());
     }
-
+    
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
         $entity = ProfileService::store($data);
         return new ProfileResource($entity);
     }
-
+    
     public function show(Profile $entity)
     {
         return new ProfileResource($entity);
     }
-
+    
     public function update(UpdateRequest $request, Profile $entity)
     {
         $data = $request->validated();
         $entity = ProfileService::update($entity, $data);
         return new ProfileResource($entity);
     }
-
+    
     public function destroy(Profile $entity)
     {
         $id = $entity->id;
         $title = $entity->title ?? '';
         $entity->delete();
-
+    
         return response([
             'message' => "Profile: $id ($title) успешно удалён",
         ], 200);
     }
-
+    
 }

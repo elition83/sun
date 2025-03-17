@@ -12,7 +12,7 @@ class UpdateRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-        }
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'sometimes|string|max:32|unique:,title,{$this->id}',
+            'title' => 'sometimes|string|max:32|unique:posts,title,{$this->id}',
             'content' => 'sometimes|string',
             'profile_id' => 'exists:profiles,id',
             'category_id' => 'exists:categorys,id',
@@ -32,6 +32,6 @@ class UpdateRequest extends FormRequest
             'is_published' => 'sometimes|boolean|nullable',
             'published_at' => 'sometimes|date|nullable',
         ];
-
-        }
+        
+    }
 }

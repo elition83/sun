@@ -3,10 +3,10 @@ category
 	
 profile
 	name = string(32) | unique()
-	user_id = FK(users, id) | onDelete('cascade')
+	user_id = FK(users, id) 
 	phone = string(32) | default('')
 	address=string(255)|default('')
-	gender=unsignedtinyInteger|default(0)
+	gender=unsignedTinyInteger|default(0)
 
 post
 	title=string(32) | unique

@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $fillable = ['model', 'lowmodel', 'table', 'lowtable', 'pivot', 'fields'];
+    protected $fillable = ['title'];
+
+    test
+    test
+    
 }

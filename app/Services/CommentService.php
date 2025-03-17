@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Comment;
-
 class CommentService
 {
     /**
@@ -13,6 +11,7 @@ class CommentService
     {
         //
     }
+
     public static function store(array $data): Comment
     {
         return Comment::create($data);

@@ -12,7 +12,7 @@ class StoreRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-        }
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -27,6 +27,6 @@ class StoreRequest extends FormRequest
             'profile_id' => 'exists:profiles,id',
             'comment_id' => 'exists:comments,id',
         ];
-
-        }
+        
+    }
 }

@@ -20,5 +20,4 @@ class RoleResource extends JsonResource
         ];
     }
 
-
 }

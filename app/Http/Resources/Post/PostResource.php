@@ -17,8 +17,8 @@ class PostResource extends JsonResource
         return [
             'title' => $this->title,
             'content' => $this->content,
-            'profile_id' => $this->profile_id, // Foreign Key,
-            'category_id' => $this->category_id, // Foreign Key,
+            'profile_id' => $this->profile_id,
+            'category_id' => $this->category_id,
             'image_path' => $this->image_path,
             'views' => $this->views,
             'likes' => $this->likes,
@@ -27,6 +27,5 @@ class PostResource extends JsonResource
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s')
         ];
     }
-
 
 }

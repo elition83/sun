@@ -12,7 +12,7 @@ class StoreRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-        }
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,8 +22,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:32|unique:,title',
+            'title' => 'required|string|max:32|unique:roles,title',
         ];
-
-        }
+        
+    }
 }

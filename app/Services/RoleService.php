@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Role;
-
 class RoleService
 {
     /**
@@ -13,6 +11,7 @@ class RoleService
     {
         //
     }
+
     public static function store(array $data): Role
     {
         return Role::create($data);

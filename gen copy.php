@@ -37,53 +37,6 @@ foreach ($models as $model => $fields) {
 }
 
 // 🔥 Разбираем структуру
-function parseStructure1($lines)
-{
-    $models = [];
-    $currentModel = null;
-
-    foreach ($lines as $line) {
-        // Убираем пробелы по краям
-        $line = rtrim($line);
-
-        // Пропускаем пустые строки
-        if (empty($line)) {
-            continue;
-        }
-
-        // Если строка начинается с буквы - это новая модель
-        if (preg_match('/^[a-zA-Z]/', $line)) {
-            $modelParts = explode('->', $line, 2);
-            $currentModel = ucfirst(trim($modelParts[0])); // Берём первое слово как имя модели
-            $models[$currentModel] = [];
-        } 
-        
-        
-        // Если строка начинается с табуляции - это поле модели
-        elseif ($currentModel && preg_match('/^\t/', $line)) {
-            $line = trim($line); // Убираем табуляцию перед обработкой
-            [$field, $type] = explode('->', $line, 2);
-
-            $field = trim($field);
-            $type = trim($type);
-
-            // Если это foreign key — корректно разбираем
-            if (str_contains($type, 'foreign')) {
-                preg_match("/foreign\('(.+?)'\)/", $type, $matches);
-                if (isset($matches[1])) {
-                    $referenceTable = str_replace('_id', 's', $matches[1]); // group_id → groups
-                    $models[$currentModel][$field] = "foreign('$matches[1]') -> references('id') -> on('$referenceTable') ";
-                }
-            } else {
-                $models[$currentModel][$field] = $type;
-            }
-        }
-    }
-    print_r ($models);
-    exit;
-    return $models;
-}
-
 function parseStructure($lines)
 {
     $models = [];
@@ -159,29 +112,21 @@ function parseStructure($lines)
     return $models;
 }
 
-
-
-
-
-
-
-
-
 // Функция генерации строк с типами полей
 function generateSchemaFields($model, $fields)
 {
     $result = "";
-    $result .= "            \$table->id();\n"; // ID первичный ключ
+    $result .= "\$table->id();\n"; // ID первичный ключ
 
     foreach ($fields as $name => $definition) {
-        $result .= "            " . parseFieldDefinition($name, $definition) . ";\n";
+        $result .= parseFieldDefinition($name, $definition) . ";\n";
     }
     
     if (str_contains($model, '_')) {
-        //если это пивотная таблица - то timestamps - прописываем
+        //если это пивотная таблица - то timestamps - не прописываем
         echo "⚠️  Для пивотных таблиц timestamps не требуется!\n";
     } else {
-        $result .= "            \$table->timestamps();"; // Дата создания и обновления
+        $result .= "\$table->timestamps();"; // Дата создания и обновления
     }
     return $result;
 }
@@ -231,7 +176,6 @@ function parseFieldDefinition($name, $definition)
             $field .= "->$modifier(" . ($modifierValue !== '' ? $modifierValue : '') . ")";
         }
     }
-    //echo "$field";
     return $field;
 }
 
@@ -476,7 +420,8 @@ function generateMigration($model, $fields, $table) {
             $search = "Schema::create('$lowtable', function (Blueprint \$table)";
             $putCode = generateSchemaFields($model, $fields);
             echo "✅  Обновляем миграцию: $migrationFile\n";
-
+            echo "$putCode";
+            exit;
             if (replaceCodeInFile($migrationFile, $search, $putCode)) {
                 echo "✅  Миграция $model переписаны.\n";
             };
@@ -697,7 +642,7 @@ function generateRequests($model, $fields)
     if (CCCC($filelPath, $artisanCmd, true)) {
         $fileContent = file_get_contents($filelPath);
         $search = "public function authorize(): bool";
-        $putCode = "        return true;";
+        $putCode = "return true;";
         if (replaceCodeInFile($filelPath, $search, $putCode)) echo "✅  Отключил авторизацию.\n";
         $search = "public function rules(): array";
         $putCode = genValidationUpdateRequest($model, $fields, $table);

@@ -12,7 +12,7 @@ class StoreRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-        }
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:32|unique:,title',
+            'title' => 'required|string|max:32|unique:posts,title',
             'content' => 'required|string',
             'profile_id' => 'exists:profiles,id',
             'category_id' => 'exists:categorys,id',
@@ -32,6 +32,6 @@ class StoreRequest extends FormRequest
             'is_published' => 'nullable|boolean',
             'published_at' => 'nullable|date',
         ];
-
-        }
+        
+    }
 }

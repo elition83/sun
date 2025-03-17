@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CmdPost extends Command
@@ -30,7 +32,7 @@ class CmdPost extends Command
                 'image_path' => 'null'
             ]);
             $this->info("Пост успешно создан с ID: {$post->id} | Title: {$post->title}");
-        } elseif (is_numeric($cmd)){
+        } elseif (is_numeric($cmd)) {
             
             try {
                 $id = (int) $cmd;
@@ -50,15 +52,30 @@ class CmdPost extends Command
 
             for ($i = 0; $i < $count; $i++) {
                 $post = Post::create([
-                    'title' => fake()->sentence(),
+
+
+                    'title' => fake()->words(3, true),
                     'content' => fake()->text(),
-                    'author' => fake()->name(),
-                    'image_path' => 'null'
+                    'profile_id' => 1, // Создаем связанный профиль
+                    'category_id' => 1, // Создаем связанную категорию
+                    'image_path' => fake()->imageUrl(),
+                    'views' => fake()->numberBetween(0, 1000),
+                    'likes' => fake()->numberBetween(0, 500),
+                    'is_published' => fake()->boolean(),
+                    'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
                 ]);
                 $this->info("Пост успешно создан с ID: {$post->id} | Title: {$post->title}");
             }
+        } elseif ($cmd == 'test') {
+            $post = Post::first();
+            dd($post);
+
         } else {
             $this->info('Ошика в команде app:post ( all | create | {id поста} )');
+            $this->info('test');
+            $user = User::find(1);
+            $profile = $user->profile;
+            dd ($profile);
         }
     }
 }

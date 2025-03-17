@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Profile;
+namespace App\Http\Resources\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProfileResource extends JsonResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,7 @@ class ProfileResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'user_id' => $this->user_id,
-            'phone' => $this->phone,
-            'address' => $this->address,
-            'gender' => $this->gender,
+            'title' => $this->title,
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s')
         ];
     }

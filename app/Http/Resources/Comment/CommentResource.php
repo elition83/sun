@@ -16,12 +16,11 @@ class CommentResource extends JsonResource
     {
         return [
             'content' => $this->content,
-            'post_id' => $this->post_id, // Foreign Key,
-            'profile_id' => $this->profile_id, // Foreign Key,
-            'comment_id' => $this->comment_id, // Foreign Key,
+            'post_id' => $this->post_id,
+            'profile_id' => $this->profile_id,
+            'comment_id' => $this->comment_id,
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s')
         ];
     }
-
 
 }
